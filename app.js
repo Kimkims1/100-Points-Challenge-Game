@@ -29,18 +29,41 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
     document.querySelector("#current-" + activePlayer).textContent = roundScore;
   } else {
     //Next Player
-    //Using ternary Operator
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    //if (activePlayer === 0) { Same thing as ternary Operator
-    // activePlayer = 1;
-    // } else {
-    //  activePlayer = 0;
-    // }
-    roundScore = 0;
-    document.getElementById("current-0").textContent = "0";
-    document.getElementById("current-1").textContent = "0";
-
-    document.querySelector(".player-0-panel").classList.remove("active");
-    document.querySelector(".player-1-panel").classList.add("active");
+    nextPlayer();
   }
 });
+
+document.querySelector(".btn-hold").addEventListener("click", function() {
+  //Add Current Score to GLOBAL Object
+
+  scores[activePlayer] += roundScore;
+
+  //Update the UI
+
+  document.querySelector("#score-" + activePlayer).textContent =
+    scores[activePlayer];
+  //Check if the Player won the game or not
+
+  //Next Player
+  nextPlayer();
+});
+
+function nextPlayer() {
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+  //if (activePlayer === 0) { Same thing as ternary Operator
+  // activePlayer = 1;
+  // } else {
+  //  activePlayer = 0;
+  // }
+  roundScore = 0;
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+
+  //document.querySelector(".player-0-panel").classList.remove("active");
+  //document.querySelector(".player-1-panel").classList.add("active");
+
+  document.querySelector(".dice").style.display = "none";
+}
