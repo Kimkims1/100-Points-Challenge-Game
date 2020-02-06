@@ -42,10 +42,20 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
 
   document.querySelector("#score-" + activePlayer).textContent =
     scores[activePlayer];
-  //Check if the Player won the game or not
-
-  //Next Player
-  nextPlayer();
+  //Check if the Player won the game or
+  if (scores[activePlayer] >= 10) {
+    document.querySelector("#name-" + activePlayer).textContent = "Winner!";
+    document.querySelector(".dice").style.display = "none";
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.remove("active");
+  } else {
+    //Next Player
+    nextPlayer();
+  }
 });
 
 function nextPlayer() {
